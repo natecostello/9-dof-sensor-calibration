@@ -46,6 +46,9 @@ void loop() {
     while (not Serial.available()){
         delay(10);
     }
+    while (Serial.available()){
+        Serial.read();
+    }
 
     //format for datafile is Yx, Yy, Yz, Wx, Wy, Wz, 1
     //for this orientation Yx = 1, Yy = 0, Yz = 0
@@ -67,6 +70,10 @@ void loop() {
     while (not Serial.available()){
         delay(10);
     }
+    while (Serial.available()){
+        Serial.read();
+    }
+
 
     //format for datafile is Yx, Yy, Yz, Wx, Wy, Wz, 1
     //for this orientation Yx = -1, Yy = 0, Yz = 0
@@ -88,6 +95,10 @@ void loop() {
     while (not Serial.available()){
         delay(10);
     }
+    while (Serial.available()){
+        Serial.read();
+    }
+
 
     //format for datafile is Yx, Yy, Yz, Wx, Wy, Wz, 1
     //for this orientation Yx = 0, Yy = 1, Yz = 0
@@ -109,6 +120,10 @@ void loop() {
     while (not Serial.available()){
         delay(10);
     }
+    while (Serial.available()){
+        Serial.read();
+    }
+
 
     //format for datafile is Yx, Yy, Yz, Wx, Wy, Wz, 1
     //for this orientation Yx = 0, Yy = -1, Yz = 0
@@ -130,6 +145,10 @@ void loop() {
     while (not Serial.available()){
         delay(10);
     }
+    while (Serial.available()){
+        Serial.read();
+    }
+
 
     //format for datafile is Yx, Yy, Yz, Wx, Wy, Wz, 1
     //for this orientation Yx = 0, Yy = 0, Yz = 1
@@ -151,6 +170,10 @@ void loop() {
     while (not Serial.available()){
         delay(10);
     }
+    while (Serial.available()){
+        Serial.read();
+    }
+
 
     //format for datafile is Yx, Yy, Yz, Wx, Wy, Wz, 1
     //for this orientation Yx = 0, Yy = 0, Yz = -1
@@ -170,5 +193,8 @@ void loop() {
 
     Serial.println("DELETE BEFORE SAVING:  Data Acquisition Complete.  Delete all lines marked as DELETE BEFORE SAVING.");
     Serial.println("DELETE BEFORE SAVING:  Save file as 'accelData.txt' and run octave/matlab file to complete computation of calibration constants.");
+    while (true){
+        delay(1000);
+    }
 }
 
