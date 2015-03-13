@@ -63,8 +63,7 @@ magVector = correctionMat * magVector;             % do rotation and scale
 xCorr = magVector(1, :);                    % get corrected vectors
 yCorr = magVector(2, :);
 zCorr = magVector(3, :);
-magVector
-% delete this later
+
 fprintf('plotting ...');
 scatter3(x,y,z,'g');
 hold on;

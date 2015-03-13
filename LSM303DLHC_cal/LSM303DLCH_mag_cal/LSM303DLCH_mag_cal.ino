@@ -59,7 +59,7 @@ void loop() {
 
     //format for datafile is mx, my, mz
 
-    for (int x = 0; x < 300; x++) {
+    for (int x = 0; x < 1000; x++) {
         accelMag.getMag(&mx, &my, &mz);
         Serial.print(mx); Serial.print(',');
         Serial.print(my); Serial.print(',');
