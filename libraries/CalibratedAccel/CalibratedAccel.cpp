@@ -69,9 +69,14 @@ CalibratedAccel::CalibratedAccel(
 **/
 void CalibratedAccel::calibrateAccelerations(float* x, float* y, float* z)
 {
-  xcal = x * acc11 + y * acc12 + z * acc13 + acc10;
-  ycal = x * acc21 + y * acc22 + z * acc23 + acc20;
-  zcal = x * acc31 + y * acc32 + z * acc33 + acc30;
+  float x_f = *x;
+  float y_f = *y;
+  float z_f = *z;
+
+  float xcal = x_f * acc11_ + y_f * acc12_ + z_f * acc13_ + acc10_;
+  float ycal = x_f * acc21_ + y_f * acc22_ + z_f * acc23_ + acc20_;
+  float zcal = x_f * acc31_ + y_f * acc32_ + z_f * acc33_ + acc30_;
+  
   *x = xcal;
   *y = ycal;
   *z = zcal;
