@@ -76,19 +76,19 @@ set (gca (), "plotboxaspectratio", [1 1 1.25]);
 pause();
 
 fprintf('Copy this into your code that calibrates the accelerometer outputs: \n')
-fprintf('float mag11 = %f;\n', correctionMat(1,1));
-fprintf('float mag12 = %f;\n', correctionMat(2,1));
-fprintf('float mag13 = %f;\n', correctionMat(3,1));
-fprintf('float mag10 = %f;\n', center(1));
+fprintf('float mr11 = %f;\n', correctionMat(1,1));
+fprintf('float mr12 = %f;\n', correctionMat(2,1));
+fprintf('float mr13 = %f;\n', correctionMat(3,1));
+fprintf('float mr10 = %f;\n', center(1));
 
-fprintf('float mag21 = %f;\n', correctionMat(1,2));
-fprintf('float mag22 = %f;\n', correctionMat(2,2));
-fprintf('float mag23 = %f;\n', correctionMat(3,2));
-fprintf('float mag20 = %f;\n', center(2));
+fprintf('float mr21 = %f;\n', correctionMat(1,2));
+fprintf('float mr22 = %f;\n', correctionMat(2,2));
+fprintf('float mr23 = %f;\n', correctionMat(3,2));
+fprintf('float mr20 = %f;\n', center(2));
 
-fprintf('float mag31 = %f;\n', correctionMat(1,3));
-fprintf('float mag32 = %f;\n', correctionMat(2,3));
-fprintf('float mag33 = %f;\n', correctionMat(3,3));
-fprintf('float mag30 = %f;\n', center(3));
+fprintf('float mr31 = %f;\n', correctionMat(1,3));
+fprintf('float mr32 = %f;\n', correctionMat(2,3));
+fprintf('float mr33 = %f;\n', correctionMat(3,3));
+fprintf('float mr30 = %f;\n', center(3));
 fprintf('end copy ... \n')
     
