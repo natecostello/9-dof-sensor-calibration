@@ -67,7 +67,7 @@ CalibratedAccel::CalibratedAccel(
 @param y float container for the y-axis acceleration
 @param z float container for the z-axis acceleration
 **/
-void CalibratedAccel::calibrateAccelerations(float* x, float* y, float* z)
+void CalibratedAccel::calibrateAccelerations(int16_t* x, int16_t* y, int16_t* z)
 {
   float x_f = *x;
   float y_f = *y;
@@ -77,7 +77,7 @@ void CalibratedAccel::calibrateAccelerations(float* x, float* y, float* z)
   float ycal = x_f * acc21_ + y_f * acc22_ + z_f * acc23_ + acc20_;
   float zcal = x_f * acc31_ + y_f * acc32_ + z_f * acc33_ + acc30_;
   
-  *x = xcal;
-  *y = ycal;
-  *z = zcal;
+  *x = (int16_t)xcal;
+  *y = (int16_t)ycal;
+  *z = (int16_t)zcal;
 }

@@ -15,24 +15,32 @@
 #include <CalibratedAccel.h>
 
 // Calibration constants from AccelCal.m
-float acc11 =  0.98286000; float acc21 = 0.0106020; float acc31 = -0.0057796;
-float acc12 = -0.00626500; float acc22 = 0.9713500; float acc32 = -0.0030856;
-float acc13 = -0.00051706; float acc23 = 0.0021296; float acc33 =  0.9804000;
-float acc10 =  0.01515800; float acc20 = 0.0164400; float acc30 = -0.0677500;
+float acc11 = 1.007143;
+float acc12 = 0.002113;
+float acc13 = -0.001270;
+float acc10 = 216.808233;
+float acc21 = 0.002628;
+float acc22 = 0.993687;
+float acc23 = 0.001869;
+float acc20 = 232.027563;
+float acc31 = -0.004927;
+float acc32 = -0.002972;
+float acc33 = 1.004429;
+float acc30 = -1067.623621;
 
-// default address is 105
-// specific I2C address may be passed here
+// LSB scaling to G for +-2G range setting
+float scale = 0.000061035;
+
+// stopwatch to time calibration
+uint16_t stopwatch;
+
 LSM303DLHC accelMag;
 
-float ax, ay, az;
+int16_t ax, ay, az;
 
-float ax_uncal;
-float ay_uncal;
-float az_uncal;
-
-CalibratedAccel myCalibratedAccel = CalibratedAccel(
-    acc11, acc12, acc13, acc10
-    acc21, acc22, acc23, acc20
+CalibratedAccel myCalibratedAccel(
+    acc11, acc12, acc13, acc10,
+    acc21, acc22, acc23, acc20,
     acc31, acc32, acc33, acc30);
 
 void setup()
@@ -56,6 +64,9 @@ void setup()
     // set scale to 2Gs
     accelMag.setAccelFullScale(2);
 
+    // set high res output to get full 12-bit accuracy
+    accelMag.setAccelHighResOutputEnabled(true);
+
     // set accel data rate to 200hz
     accelMag.setAccelOutputDataRate(200);
 }
@@ -65,24 +76,23 @@ void loop()
     // read raw angular velocity measurements from device
     accelMag.getAcceleration(&ax, &ay, &az);
 
-    // i think this is needed for the offset calibraition to work (unless called unscaled)
-    ax = ax*0.0000625F;
-    ay = ay*0.0000625F;
-    az = az*0.0000625F;
-
     Serial.print("Raw Accelation:\t");
-    Serial.print(ax); Serial.print("\t");
-    Serial.print(ay); Serial.print("\t");
-    Serial.print(az); Serial.print("\t");
+    Serial.print(ax * scale); Serial.print("\t");
+    Serial.print(ay * scale); Serial.print("\t");
+    Serial.print(az * scale); Serial.print("\t");
 
 
-    //calibrate:
+    //calibrate and time calibration
+    stopwatch = micros();
     myCalibratedAccel.calibrateAccelerations(&ax, &ay, &az);
+    stopwatch = micros() - stopwatch;
 
     Serial.print("Cal Accelation:\t");
-    Serial.print(ax); Serial.print("\t");
-    Serial.print(ay); Serial.print("\t");
-    Serial.print(az); 
+    Serial.print(ax * scale); Serial.print("\t");
+    Serial.print(ay * scale); Serial.print("\t");
+    Serial.print(az * scale); Serial.print("\t");
+
+    Serial.print("micros for cal:"); Serial.print(stopwatch);
     Serial.println();
 
     delay(1000);

@@ -13,7 +13,7 @@
 LSM303DLHC accelMag;
 
 int16_t ax, ay, az;
-int yx, yy, yz;
+int16_t yx, yy, yz;
 
 
 void setup() {
@@ -31,8 +31,14 @@ void setup() {
     Serial.println("DELETE BEFORE SAVING: Testing device connections...");
     Serial.println(accelMag.testConnection() ? "DELETE BEFORE SAVING: LSM303DLHC connection successful" : "DELETE BEFORE SAVING: LSM303DLHC connection failed");
 
-    // set scale to 2Gs.  Note this corresponds to a scaling factor of 0.0000625F.  Accuracy is to 4 decimals.
+    // set scale to +-2Gs. Raw output for 1G = 1024 (16384 without 4-bit shift)
     accelMag.setAccelFullScale(2); 
+
+    // set scale to +-4Gs. Raw output for 1G = 512.
+    // accelMag.setAccelFullScale(4); 
+
+    // high res output allows 12-bit vice 10-bit precision.
+    accelMag.setAccelHighResOutputEnabled(true);
 
     // set accel data rate to 200hz
     accelMag.setAccelOutputDataRate(200);
@@ -49,21 +55,22 @@ void loop() {
     while (Serial.available()){
         Serial.read();
     }
-
+    
     //format for datafile is Yx, Yy, Yz, Wx, Wy, Wz, 1
-    //for this orientation Yx = 1, Yy = 0, Yz = 0
-    yx = 1;
+    
+    //for this orientation Yx = 16384, Yy = 0, Yz = 0
+    yx = 16384;
     yy = 0;
     yz = 0;
 
     for (int x = 0; x < 50; x++) {
         accelMag.getAcceleration(&ax, &ay, &az);
-        Serial.print(yx); Serial.print(',');
-        Serial.print(yy); Serial.print(',');
-        Serial.print(yz); Serial.print(',');
-        Serial.print(ax * 0.0000625F, 4); Serial.print(',');
-        Serial.print(ay * 0.0000625F, 4); Serial.print(',');
-        Serial.print(az * 0.0000625F, 4); Serial.println();
+        Serial.print(yx); Serial.print(",");
+        Serial.print(yy); Serial.print(",");
+        Serial.print(yz); Serial.print(",");
+        Serial.print(ax); Serial.print(",");
+        Serial.print(ay); Serial.print(",");
+        Serial.print(az); Serial.println(",1");
     }
 
     Serial.println("DELETE BEFORE SAVING: Align X-axis down, wait 10 seconds to allow stabilization, then send any key over serial to proceed");
@@ -77,18 +84,18 @@ void loop() {
 
     //format for datafile is Yx, Yy, Yz, Wx, Wy, Wz, 1
     //for this orientation Yx = -1, Yy = 0, Yz = 0
-    yx = -1;
+    yx = -16384;
     yy = 0;
     yz = 0;
 
     for (int x = 0; x < 50; x++) {
         accelMag.getAcceleration(&ax, &ay, &az);
-        Serial.print(yx); Serial.print(',');
-        Serial.print(yy); Serial.print(',');
-        Serial.print(yz); Serial.print(',');
-        Serial.print(ax * 0.0000625F, 4); Serial.print(',');
-        Serial.print(ay * 0.0000625F, 4); Serial.print(',');
-        Serial.print(az * 0.0000625F, 4); Serial.println();
+        Serial.print(yx); Serial.print(",");
+        Serial.print(yy); Serial.print(",");
+        Serial.print(yz); Serial.print(",");
+        Serial.print(ax); Serial.print(",");
+        Serial.print(ay); Serial.print(",");
+        Serial.print(az); Serial.println(",1");
     }
 
     Serial.println("DELETE BEFORE SAVING: Align Y-axis up, wait 10 seconds to allow stabilization, then send any key over serial to proceed");
@@ -103,17 +110,17 @@ void loop() {
     //format for datafile is Yx, Yy, Yz, Wx, Wy, Wz, 1
     //for this orientation Yx = 0, Yy = 1, Yz = 0
     yx = 0;
-    yy = 1;
+    yy = 16384;
     yz = 0;
 
     for (int x = 0; x < 50; x++) {
         accelMag.getAcceleration(&ax, &ay, &az);
-        Serial.print(yx); Serial.print(',');
-        Serial.print(yy); Serial.print(',');
-        Serial.print(yz); Serial.print(',');
-        Serial.print(ax * 0.0000625F, 4); Serial.print(',');
-        Serial.print(ay * 0.0000625F, 4); Serial.print(',');
-        Serial.print(az * 0.0000625F, 4); Serial.println();
+        Serial.print(yx); Serial.print(",");
+        Serial.print(yy); Serial.print(",");
+        Serial.print(yz); Serial.print(",");
+        Serial.print(ax); Serial.print(",");
+        Serial.print(ay); Serial.print(",");
+        Serial.print(az); Serial.println(",1");
     }
 
     Serial.println("DELETE BEFORE SAVING: Align Y-axis down, wait 10 seconds to allow stabilization, then send any key over serial to proceed");
@@ -128,17 +135,17 @@ void loop() {
     //format for datafile is Yx, Yy, Yz, Wx, Wy, Wz, 1
     //for this orientation Yx = 0, Yy = -1, Yz = 0
     yx = 0;
-    yy = -1;
+    yy = -16384;
     yz = 0;
 
     for (int x = 0; x < 50; x++) {
         accelMag.getAcceleration(&ax, &ay, &az);
-        Serial.print(yx); Serial.print(',');
-        Serial.print(yy); Serial.print(',');
-        Serial.print(yz); Serial.print(',');
-        Serial.print(ax * 0.0000625F, 4); Serial.print(',');
-        Serial.print(ay * 0.0000625F, 4); Serial.print(',');
-        Serial.print(az * 0.0000625F, 4); Serial.println();
+        Serial.print(yx); Serial.print(",");
+        Serial.print(yy); Serial.print(",");
+        Serial.print(yz); Serial.print(",");
+        Serial.print(ax); Serial.print(",");
+        Serial.print(ay); Serial.print(",");
+        Serial.print(az); Serial.println(",1");
     }
 
     Serial.println("DELETE BEFORE SAVING: Align Z-axis up, wait 10 seconds to allow stabilization, then send any key over serial to proceed");
@@ -154,16 +161,16 @@ void loop() {
     //for this orientation Yx = 0, Yy = 0, Yz = 1
     yx = 0;
     yy = 0;
-    yz = 1;
+    yz = 16384;
 
     for (int x = 0; x < 50; x++) {
         accelMag.getAcceleration(&ax, &ay, &az);
-        Serial.print(yx); Serial.print(',');
-        Serial.print(yy); Serial.print(',');
-        Serial.print(yz); Serial.print(',');
-        Serial.print(ax * 0.0000625F, 4); Serial.print(',');
-        Serial.print(ay * 0.0000625F, 4); Serial.print(',');
-        Serial.print(az * 0.0000625F, 4); Serial.println();
+        Serial.print(yx); Serial.print(",");
+        Serial.print(yy); Serial.print(",");
+        Serial.print(yz); Serial.print(",");
+        Serial.print(ax); Serial.print(",");
+        Serial.print(ay); Serial.print(",");
+        Serial.print(az); Serial.println(",1");
     }
     
     Serial.println("DELETE BEFORE SAVING: Align Z-axis down, wait 10 seconds to allow stabilization, then send any key over serial to proceed");
@@ -179,16 +186,16 @@ void loop() {
     //for this orientation Yx = 0, Yy = 0, Yz = -1
     yx = 0;
     yy = 0;
-    yz = -1;
+    yz = -16384;
 
     for (int x = 0; x < 50; x++) {
         accelMag.getAcceleration(&ax, &ay, &az);
-        Serial.print(yx); Serial.print(',');
-        Serial.print(yy); Serial.print(',');
-        Serial.print(yz); Serial.print(',');
-        Serial.print(ax * 0.0000625F, 4); Serial.print(',');
-        Serial.print(ay * 0.0000625F, 4); Serial.print(',');
-        Serial.print(az * 0.0000625F, 4); Serial.println();
+        Serial.print(yx); Serial.print(",");
+        Serial.print(yy); Serial.print(",");
+        Serial.print(yz); Serial.print(",");
+        Serial.print(ax); Serial.print(",");
+        Serial.print(ay); Serial.print(",");
+        Serial.print(az); Serial.println(",1");
     }
 
     Serial.println("DELETE BEFORE SAVING:  Data Acquisition Complete.  Delete all lines marked as DELETE BEFORE SAVING.");

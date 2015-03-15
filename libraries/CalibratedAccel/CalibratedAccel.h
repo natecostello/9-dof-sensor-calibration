@@ -24,9 +24,9 @@ class CalibratedAccel
     CalibratedAccel(
       float acc11, float acc12, float acc13, float acc10, 
       float acc21, float acc22, float acc23, float acc20, 
-      float acc31, float acc32, float acc33, float acc30)
+      float acc31, float acc32, float acc33, float acc30);
 
-    void calibrateAccelerations(float* x, float* y, float* z);
+    void calibrateAccelerations(int16_t* x, int16_t* y, int16_t* z);
 
   // library-accessible "private" interface
   private:
