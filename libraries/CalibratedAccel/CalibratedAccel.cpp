@@ -9,8 +9,10 @@
  #include "WProgram.h"
 #endif
 
+#include "Math.h"
 // include this library's description file
 #include "CalibratedAccel.h"
+
 
 /** Default constructor.  Sets calibration parameters such that inputs are not modified
 **/
@@ -77,7 +79,7 @@ void CalibratedAccel::calibrateAccelerations(int16_t* x, int16_t* y, int16_t* z)
   float ycal = x_f * acc21_ + y_f * acc22_ + z_f * acc23_ + acc20_;
   float zcal = x_f * acc31_ + y_f * acc32_ + z_f * acc33_ + acc30_;
   
-  *x = (int16_t)xcal;
-  *y = (int16_t)ycal;
-  *z = (int16_t)zcal;
+  *x = (int16_t)round(xcal);
+  *y = (int16_t)round(ycal);
+  *z = (int16_t)round(zcal);
 }

@@ -31,10 +31,10 @@ fprintf('float acc33 = %f;\n',X(3,3));
 fprintf('float acc30 = %f;\n',X(4,3));
 fprintf('end copy ... \n')
 
-fprintf('results ...\n');
-for i = 1:length(W)
-    fprintf('uncal error: %10.2e %10.2e %10.2e cal error: %10.2e %10.2e %10.2e \n', abs(Y(i,:) - W(i,1:3)),abs(Y(i,:) - W(i,:)*X));
-endfor
+% fprintf('results ...\n');
+% for i = 1:length(W)
+%     fprintf('uncal error: %10.2e %10.2e %10.2e cal error: %10.2e %10.2e %10.2e \n', abs(Y(i,:) - W(i,1:3)),abs(Y(i,:) - W(i,:)*X));
+% endfor
 
 
 

@@ -15,18 +15,18 @@
 #include <CalibratedAccel.h>
 
 // Calibration constants from AccelCal.m
-float acc11 = 1.007143;
-float acc12 = 0.002113;
-float acc13 = -0.001270;
-float acc10 = 216.808233;
-float acc21 = 0.002628;
-float acc22 = 0.993687;
-float acc23 = 0.001869;
-float acc20 = 232.027563;
-float acc31 = -0.004927;
-float acc32 = -0.002972;
-float acc33 = 1.004429;
-float acc30 = -1067.623621;
+float acc11 = 1.007441;
+float acc12 = -0.002214;
+float acc13 = 0.002661;
+float acc10 = 210.452155;
+float acc21 = 0.006953;
+float acc22 = 0.993671;
+float acc23 = 0.001837;
+float acc20 = 216.580785;
+float acc31 = -0.004203;
+float acc32 = -0.001992;
+float acc33 = 1.004737;
+float acc30 = -1046.996387;
 
 // LSB scaling to G for +-2G range setting
 float scale = 0.000061035;
