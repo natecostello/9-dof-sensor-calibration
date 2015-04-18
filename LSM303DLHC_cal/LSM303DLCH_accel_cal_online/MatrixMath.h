@@ -1,6 +1,9 @@
 /*
  *  MatrixMath.h Library for Matrix Math
- *
+ * 
+ *  Modified by Nate Costello on 4/1/15 to remove printing functions and
+ *  to rename the instance created to MatrixInst to eliminate compilation
+ *  conflicts when using the Arduino Due and compiling in Sublime Text + Stino
  *  Created by Charlie Matlack on 12/18/10.
  *  Modified from code by RobH45345 on Arduino Forums, algorithm from
  *  NUMERICAL RECIPES: The Art of Scientific Computing.
@@ -22,7 +25,7 @@ class MatrixMath
 {
 public:
 	//MatrixMath();
-	void Print(float* A, int m, int n, String label);
+	void Print(float* A, int m, int n);
 	void Copy(float* A, int n, int m, float* B);
 	void Multiply(float* A, float* B, int m, int p, int n, float* C);
 	void Add(float* A, float* B, int m, int n, float* C);

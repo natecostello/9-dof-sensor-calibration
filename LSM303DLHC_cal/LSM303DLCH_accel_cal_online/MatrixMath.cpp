@@ -14,12 +14,11 @@ MatrixMath MatrixInst;			// Pre-instantiate
 
 // Matrix Printing Routine
 // Uses tabs to separate numbers under assumption printed float width won't cause problems
-void MatrixMath::Print(float* A, int m, int n, String label)
+void MatrixMath::Print(float* A, int m, int n)
 {
 	// A = input matrix (m x n)
 	int i, j;
 	Serial.println();
-	Serial.println(label);
 	for (i = 0; i < m; i++)
 	{
 		for (j = 0; j < n; j++)
