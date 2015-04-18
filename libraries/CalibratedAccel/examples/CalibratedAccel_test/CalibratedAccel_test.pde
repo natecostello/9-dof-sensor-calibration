@@ -15,18 +15,32 @@
 #include <CalibratedAccel.h>
 
 // Calibration constants from AccelCal.m
-float acc11 = 1.007441;
-float acc12 = -0.002214;
-float acc13 = 0.002661;
-float acc10 = 210.452155;
-float acc21 = 0.006953;
-float acc22 = 0.993671;
-float acc23 = 0.001837;
-float acc20 = 216.580785;
-float acc31 = -0.004203;
-float acc32 = -0.001992;
-float acc33 = 1.004737;
-float acc30 = -1046.996387;
+float acc11= 1.00769698619843;
+float acc21= 0.00738904858008;
+float acc31= -0.00429420731962;
+float acc12= -0.00187385268509;
+float acc22= 0.99392205476761;
+float acc32= -0.00173574441578;
+float acc13= 0.00266216672026;
+float acc23= -0.00259302323684;
+float acc33= 1.00434720516205;
+float acc10= 0.01499523222446;
+float acc20= 0.01545491814613;
+float acc30= -0.03629757463932;
+
+// float acc11 = 1.007441;
+// float acc12 = -0.002214;
+// float acc13 = 0.002661;
+// float acc10 = 210.452155;
+// float acc21 = 0.006953;
+// float acc22 = 0.993671;
+// float acc23 = 0.001837;
+// float acc20 = 216.580785;
+// float acc31 = -0.004203;
+// float acc32 = -0.001992;
+// float acc33 = 1.004737;
+// float acc30 = -1046.996387;
+
 
 // LSB scaling to G for +-2G range setting
 float scale = 0.000061035;
@@ -56,7 +70,7 @@ void setup()
     // initialize serial communication
     // (38400 chosen because it works as well at 8MHz as it does at 16MHz, but
     // it's really up to you depending on your project)
-    Serial.begin(9600);
+    Serial.begin(115200);
 
     // initialize device
     Serial.println("Initializing I2C devices...");
@@ -85,9 +99,9 @@ void loop()
     saz = scale * az;
 
     Serial.print("Raw Accelation:\t");
-    Serial.print(sax); Serial.print("\t");
-    Serial.print(say); Serial.print("\t");
-    Serial.print(saz); Serial.print("\t");
+    Serial.print(sax,8); Serial.print("\t");
+    Serial.print(say,8); Serial.print("\t");
+    Serial.print(saz,8); Serial.print("\t");
 
 
     //calibrate and time calibration
@@ -96,9 +110,9 @@ void loop()
     stopwatch = micros() - stopwatch;
 
     Serial.print("Cal Accelation:\t");
-    Serial.print(sax); Serial.print("\t");
-    Serial.print(say); Serial.print("\t");
-    Serial.print(saz); Serial.print("\t");
+    Serial.print(sax,8); Serial.print("\t");
+    Serial.print(say,8); Serial.print("\t");
+    Serial.print(saz,8); Serial.print("\t");
 
     Serial.print("micros for cal:"); Serial.print(stopwatch);
     Serial.println();
