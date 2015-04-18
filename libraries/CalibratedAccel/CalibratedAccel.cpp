@@ -18,18 +18,18 @@
 **/
 CalibratedAccel::CalibratedAccel(void)
 {
-  acc11_ = 1;
-  acc12_ = 0;
-  acc13_ = 0;
-  acc10_ = 0;
-  acc21_ = 0;
-  acc22_ = 1;
-  acc23_ = 0;
-  acc20_ = 0;
-  acc31_ = 0;
-  acc32_ = 0;
-  acc33_ = 1;
-  acc30_ = 0;
+  acc11_ = 1.0;
+  acc12_ = 0.0;
+  acc13_ = 0.0;
+  acc10_ = 0.0;
+  acc21_ = 0.0;
+  acc22_ = 1.0;
+  acc23_ = 0.0;
+  acc20_ = 0.0;
+  acc31_ = 0.0;
+  acc32_ = 0.0;
+  acc33_ = 1.0;
+  acc30_ = 0.0;
 }
 
 /**  Constructor.  Sets calibration parameters to the parameters provided.
@@ -64,12 +64,12 @@ CalibratedAccel::CalibratedAccel(
   acc30_ = acc30;
 }
 
-/** Calibrate the acceleration data
+/** Calibrate the acceleration data.  Requires units of Gs.
 @param x float container for the x-axis acceleration
 @param y float container for the y-axis acceleration
 @param z float container for the z-axis acceleration
 **/
-void CalibratedAccel::calibrateAccelerations(int16_t* x, int16_t* y, int16_t* z)
+void CalibratedAccel::calibrateAccelerations(float* x, float* y, float* z)
 {
   float x_f = *x;
   float y_f = *y;
@@ -79,7 +79,7 @@ void CalibratedAccel::calibrateAccelerations(int16_t* x, int16_t* y, int16_t* z)
   float ycal = x_f * acc21_ + y_f * acc22_ + z_f * acc23_ + acc20_;
   float zcal = x_f * acc31_ + y_f * acc32_ + z_f * acc33_ + acc30_;
   
-  *x = (int16_t)round(xcal);
-  *y = (int16_t)round(ycal);
-  *z = (int16_t)round(zcal);
+  *x = xcal;
+  *y = ycal;
+  *z = zcal;
 }

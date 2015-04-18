@@ -31,6 +31,11 @@ float acc30 = -1046.996387;
 // LSB scaling to G for +-2G range setting
 float scale = 0.000061035;
 
+// scaled accelerations
+float sax;
+float say;
+float saz;
+
 // stopwatch to time calibration
 uint16_t stopwatch;
 
@@ -75,22 +80,25 @@ void loop()
 {
     // read raw angular velocity measurements from device
     accelMag.getAcceleration(&ax, &ay, &az);
+    sax = scale * ax;
+    say = scale * ay;
+    saz = scale * az;
 
     Serial.print("Raw Accelation:\t");
-    Serial.print(ax * scale); Serial.print("\t");
-    Serial.print(ay * scale); Serial.print("\t");
-    Serial.print(az * scale); Serial.print("\t");
+    Serial.print(sax); Serial.print("\t");
+    Serial.print(say); Serial.print("\t");
+    Serial.print(saz); Serial.print("\t");
 
 
     //calibrate and time calibration
     stopwatch = micros();
-    myCalibratedAccel.calibrateAccelerations(&ax, &ay, &az);
+    myCalibratedAccel.calibrateAccelerations(&sax, &say, &saz);
     stopwatch = micros() - stopwatch;
 
     Serial.print("Cal Accelation:\t");
-    Serial.print(ax * scale); Serial.print("\t");
-    Serial.print(ay * scale); Serial.print("\t");
-    Serial.print(az * scale); Serial.print("\t");
+    Serial.print(sax); Serial.print("\t");
+    Serial.print(say); Serial.print("\t");
+    Serial.print(saz); Serial.print("\t");
 
     Serial.print("micros for cal:"); Serial.print(stopwatch);
     Serial.println();
